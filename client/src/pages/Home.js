@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useLazyQuery, gql } from '@apollo/client';
 
 
 const GET_ALL_POSTS = gql`
@@ -17,6 +17,7 @@ const GET_ALL_POSTS = gql`
 const Home = () => {
 
     const { data, loading, error } = useQuery(GET_ALL_POSTS)
+    const [fetchPosts, { data: posts, loading: spinner, error: err }] = useLazyQuery(GET_ALL_POSTS)
 
     if (loading) return <p>Loading ...</p>
 
@@ -30,18 +31,16 @@ const Home = () => {
                         <div className="col-md-4" key={post.id}>
                             <div className='card'>
                                 <div className="card-body">
-                                    <div className="card-title">
-                                        <h4>{post.title}</h4>
-                                    </div>
-                                    <p className="card-text">
-                                        {post.description}
-                                    </p>
+                                    <div className="card-title"> <h4>{post.title}</h4> </div>
+                                    <p className="card-text"> {post.description} </p>
                                 </div>
                             </div>
                         </div>
                     )
                 })}
+                <button onClick={() => { fetchPosts() }} className="btn-btn-raised btn-primary">Fetch</button>
             </div>
+            {JSON.stringify(posts)}
         </div>
     );
 }

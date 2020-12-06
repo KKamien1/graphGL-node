@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react'
-import { ApolloProvider, ApolloClient, InMemoryCache, useQuery, gql } from '@apollo/client';
+import React from 'react'
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import Home from './pages/Home'
 
