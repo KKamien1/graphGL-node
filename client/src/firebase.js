@@ -23,5 +23,5 @@ export const authFn = firebase.auth()
 
 console.log(typeof firebase.auth.googleAuthProvider);
 
-// export const googleAuthProvider = firebase.auth.googleAuthProvider();
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export default firebase;
